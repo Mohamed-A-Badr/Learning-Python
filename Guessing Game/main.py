@@ -1,6 +1,8 @@
 import random
 import string
 
+counter = 0
+noOfGuesses = 3
 typeOfGame = 0
 while True:
     try:
@@ -21,21 +23,35 @@ if typeOfGame == 1:
         end = int(input("Choose your end range: "))
         correctNumber = random.randint(start, end)
         while True:
-            guess = int(input("Enter your guess: "))
-            if guess == correctNumber:
-                print("Congrat, You're Right")
-                break
+            if counter <= 3:
+                guess = int(input("Enter your guess: "))
+                if guess == correctNumber:
+                    print("Congrat, You're Right")
+                    break
+                else:
+                    print("You'r Wrong try again")
+                    print("You have", noOfGuesses, "guesses")
+                    noOfGuesses = noOfGuesses - 1
+                    counter = counter + 1
             else:
-                print("You'r Wrong try again")
-    except ValueError as err:
+                print("You lose")
+                break
+    except ValueError:
         print("Please Enter valid integer number")
 
 elif typeOfGame == 2:
     correctCharacter = random.choice(string.ascii_letters)
     while True:
-        guess = input("Enter your guess: ").lower()
-        if guess == correctCharacter:
-            print("Congrat, You're right")
-            break
+        if counter <= 3:
+            guess = input("Enter your guess: ").lower()
+            if guess == correctCharacter:
+                print("Congrat, You're right")
+                break
+            else:
+                print("Worng, try again")
+                print("You have", noOfGuesses, "guesses")
+                noOfGuesses = noOfGuesses - 1
+                counter = counter + 1
         else:
-            print("Worng, try again")
+            print("You lose")
+            break
